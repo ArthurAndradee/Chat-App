@@ -15,15 +15,14 @@ function ChatsPage({ messages, currentUserId }: MessageProps) {
   const [showAboutContainer, setShowAboutContainer] = useState(false);
   
   useEffect(() => {
-    setShowAboutContainer(false);
+    setShowAboutContainer(true);
   }, []);
 
   return (
     <div className="sections-container">
       <section className='contacts-container'>
         <header className='d-flex search-container'>
-          <div className='search-about'>Chats</div>
-          <div className='search-button'>🔍</div>
+          <input className='search-about' placeholder='Chats'/>
         </header>
         {/* Example contact component */}
         <div className='contact-container d-flex'>
@@ -37,7 +36,7 @@ function ChatsPage({ messages, currentUserId }: MessageProps) {
       </section>
       <section className='chat-container'>
         <header className='d-flex'>
-          <img className='chat-picture' src='https://hips.hearstapps.com/hmg-prod/images/frenchie-the-boys-season-3-1655812929.jpg?crop=0.253xw:0.380xh;0.580xw,0.0484xh&resize=980:*' alt='nick from the office' />
+          <img className='chat-picture' onClick={() => setShowAboutContainer(!showAboutContainer)} src='https://hips.hearstapps.com/hmg-prod/images/frenchie-the-boys-season-3-1655812929.jpg?crop=0.253xw:0.380xh;0.580xw,0.0484xh&resize=980:*' alt='nick from the office' />
           <div className='chat-info'>
             <div className='chat-name'>Contact name</div>
             <div className='chat-status'>Status</div>
@@ -66,8 +65,10 @@ function ChatsPage({ messages, currentUserId }: MessageProps) {
       </section>
       {showAboutContainer && 
       <section className='about-container'>
-        <img src='https://hips.hearstapps.com/hmg-prod/images/frenchie-the-boys-season-3-1655812929.jpg?crop=0.253xw:0.380xh;0.580xw,0.0484xh&resize=980:*' alt='group-pic' />
-        <div>Group Title</div>
+        <div className='about-info'>
+          <img className='chat-picture' src='https://hips.hearstapps.com/hmg-prod/images/frenchie-the-boys-season-3-1655812929.jpg?crop=0.253xw:0.380xh;0.580xw,0.0484xh&resize=980:*' alt='group-pic' />
+          <div>Group Title</div>
+        </div>
       </section>
       }
     </div>

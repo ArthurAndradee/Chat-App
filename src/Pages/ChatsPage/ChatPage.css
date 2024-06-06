@@ -10,43 +10,33 @@
     background: linear-gradient(115deg, rgba(0,4,43,1) 0%, rgba(121,71,74,1) 83%, rgba(0,4,43,1) 100%);
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#00042b",endColorstr="#00042b",GradientType=1);
     
-    color: #FFF;
+    color: #FFFFFF;
+
 }
 
-.contacts-container, .chat-container {
-    margin: 50px 0 50px 50px;
-}
-
-.search-container {
-    padding: 0px 20px 20px 20px;
-    
-    .search-button {
-        margin-left: auto;
+.contacts-container {
+    .search-container {
+        .search-about {
+            width: 25vw;
+            color: #FFFFFF;
+            padding: 5px 5px;
+        
+            border: none;
+            outline: none;
+            margin-bottom: 10px;
+        
+            background: transparent;
+            border-bottom: 2px solid #FFFFFF;
+        }   
     }
-}
 
+    .contact-container {
+        width: 25vw;
 
-.contact-container {
-    width: 25vw;
-    
-    padding: 20px;
+        padding: 20px;
 
-    background-color: #82828269;
-    border-radius: 25px;
-}
-
-.chat-picture {
-    height: 60px;
-    width: 60px;
-
-    border-radius: 50%;
-}
-
-.chat-info {
-    padding: 5px 15px;
-
-    .chat-name {
-        font-weight: 700;
+        background-color: #82828269;
+        border-radius: 25px;
     }
 }
 
@@ -63,6 +53,7 @@
     background: -webkit-linear-gradient(0deg, rgba(142,142,142,0.08883443940121472) 51%, rgba(206,206,206,0) 100%);
     background: linear-gradient(0deg, rgba(142,142,142,0.08883443940121472) 51%, rgba(206,206,206,0) 100%);
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#8e8e8e",endColorstr="#cecece",GradientType=1);
+    
     .messages-box {
         height: 57.5vh;
         margin-bottom: 10px;
@@ -76,7 +67,6 @@
             background-color: rgba(165, 165, 165, 0.311);
         }
     }
-
 
     .message-form {
         display: flex;
@@ -107,5 +97,35 @@
 
             margin: 5px;
         }
+    }
+}
+
+.about-container {
+    width: 25vw;
+
+    text-align: center;
+
+    .about-info {
+        margin-top: 50px;
+    }
+
+}
+
+.contacts-container, .chat-container {
+    margin: 50px 0 50px 50px;
+}
+
+.chat-picture {
+    height: 60px;
+    width: 60px;
+
+    border-radius: 50%;
+}
+
+.chat-info {
+    padding: 5px 15px;
+
+    .chat-name {
+        font-weight: 700;
     }
 }
