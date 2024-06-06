@@ -14,7 +14,7 @@ function App() {
   if (!username) {
     return <AuthPage onUsernameSubmit={handleUsernameSubmit}/>;
   } else {
-    return <ChatsPage/>;
+    return <ChatsPage messages={[]} currentUserId={0}/>;
   }
 }
 
