@@ -13,10 +13,6 @@ interface MessageProps {
 
 function ChatsPage({ messages, currentUserId }: MessageProps) {
   const [showAboutContainer, setShowAboutContainer] = useState(false);
-  
-  useEffect(() => {
-    setShowAboutContainer(true);
-  }, []);
 
   return (
     <div className="sections-container">
