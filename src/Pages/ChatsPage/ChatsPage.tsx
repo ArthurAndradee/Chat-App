@@ -54,13 +54,15 @@ function ChatsPage({ messages, currentUserId }: MessageProps) {
 							  </div>
 
                 {/* Sent Message */}
-							  <div className="d-flex justify-content-end mb-4">
+                {/* Way to handle messages and to apply different styles is based on classname
+                ex: flex-row-reverse  */}
+							  <div className="d-flex justify-content-end flex-row-reverse mb-4">
 							  	<div className="msg-cotainer-send">
 							  		Hi Khalid i am good tnx how about you?
 							  		<span className="msg-time-send">8:55 AM, Today</span>
 							  	</div>
 							  	<div className="img-cont-msg">
-							  <img src="" className="rounded-circle user-img-msg"/>
+							      <img src="" className="rounded-circle user-img-msg"/>
 							  	</div>
 							  </div>
 
