@@ -49,15 +49,15 @@ function ChatsPage({ messages, currentUserId }: MessageProps) {
 								  </div>
 								  <div className="msg-cotainer">
 								  	Hi, how are you samim?
-								    <span className="msg_time">8:40 AM, Today</span>
+								    <span className="msg-time">8:40 AM, Today</span>
 								  </div>
 							  </div>
 
                 {/* Sent Message */}
 							  <div className="d-flex justify-content-end mb-4">
-							  	<div className="msg-cotainer_send">
+							  	<div className="msg-cotainer-send">
 							  		Hi Khalid i am good tnx how about you?
-							  		<span className="msg_time_send">8:55 AM, Today</span>
+							  		<span className="msg-time-send">8:55 AM, Today</span>
 							  	</div>
 							  	<div className="img-cont-msg">
 							  <img src="https://hips.hearstapps.com/hmg-prod/images/frenchie-the-boys-season-3-1655812929.jpg?crop=0.253xw:0.380xh;0.580xw,0.0484xh&resize=980:*" className="rounded-circle user-img-msg"/>
@@ -71,7 +71,7 @@ function ChatsPage({ messages, currentUserId }: MessageProps) {
 							  	</div>
 							  	<div className="msg-cotainer">
 							  		I am good too, thank you for your chat template
-							  		<span className="msg_time">9:00 AM, Today</span>
+							  		<span className="msg-time">9:00 AM, Today</span>
 							  	</div>
 							  </div>
 

@@ -172,7 +172,7 @@
     position: relative;
 }
 
-.msg_time {
+.msg-time {
     position: absolute;
     left: 0;
     bottom: -15px;
@@ -180,7 +180,7 @@
     font-size: 10px;
 }
 
-.msg_cotainer_send {
+.msg-cotainer-send {
     margin-top: auto;
     margin-bottom: auto;
     margin-right: 10px;
@@ -190,7 +190,7 @@
     position: relative;
 }
 
-.msg_time_send {
+.msg-time-send {
     position: absolute;
     right: 0;
     bottom: -15px;
