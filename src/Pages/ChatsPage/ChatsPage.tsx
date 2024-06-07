@@ -41,82 +41,40 @@ function ChatsPage({ messages, currentUserId }: MessageProps) {
         </header>
         <div className='chat-messages-container'>
           <div className='messages-box'>
-            {/* <div className='messages-container'>
-              {messages.map((message) => (
-                <div
-                  key={message.id}
-                  className={`message ${message.userId === currentUserId ? 'message-sender' : 'message-receiver'}`}
-                >
-                  {message.text}
-                </div>
-              ))}
-            </div> */}
 						<div className="card-body msg-card-body">
 							<div className="d-flex justify-content-start mb-4">
-								<div className="img-cont-msg">
-									<img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg" className="rounded-circle user-img-msg"/>
-								</div>
-								<div className="msg-cotainer">
-									Hi, how are you samim?
-									<span className="msg_time">8:40 AM, Today</span>
-								</div>
-							</div>
-							<div className="d-flex justify-content-end mb-4">
-								<div className="msg-cotainer_send">
-									Hi Khalid i am good tnx how about you?
-									<span className="msg_time_send">8:55 AM, Today</span>
-								</div>
-								<div className="img-cont-msg">
-							<img src="https://hips.hearstapps.com/hmg-prod/images/frenchie-the-boys-season-3-1655812929.jpg?crop=0.253xw:0.380xh;0.580xw,0.0484xh&resize=980:*" className="rounded-circle user-img-msg"/>
-								</div>
-							</div>
-							<div className="d-flex justify-content-start mb-4">
-								<div className="img-cont-msg">
-									<img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg" className="rounded-circle user-img-msg"/>
-								</div>
-								<div className="msg-cotainer">
-									I am good too, thank you for your chat template
-									<span className="msg_time">9:00 AM, Today</span>
-								</div>
-							</div>
-							<div className="d-flex justify-content-end mb-4">
-								<div className="msg-cotainer_send">
-									You are welcome
-									<span className="msg_time_send">9:05 AM, Today</span>
-								</div>
-								<div className="img-cont-msg">
-							<img src="https://hips.hearstapps.com/hmg-prod/images/frenchie-the-boys-season-3-1655812929.jpg?crop=0.253xw:0.380xh;0.580xw,0.0484xh&resize=980:*" className="rounded-circle user-img-msg"/>
+                {/* Received Message */}
+							  <div className="img-cont-msg">
+								  	<img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg" className="rounded-circle user-img-msg"/>
+								  </div>
+								  <div className="msg-cotainer">
+								  	Hi, how are you samim?
+								    <span className="msg_time">8:40 AM, Today</span>
+								  </div>
+							  </div>
 
-								</div>
-							</div>
-							<div className="d-flex justify-content-start mb-4">
-								<div className="img-cont-msg">
-									<img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg" className="rounded-circle user-img-msg"/>
-								</div>
-								<div className="msg-cotainer">
-									I am looking for your next templates
-									<span className="msg_time">9:07 AM, Today</span>
-								</div>
-							</div>
-							<div className="d-flex justify-content-end mb-4">
-								<div className="msg-cotainer_send">
-									Ok, thank you have a good day
-									<span className="msg_time_send">9:10 AM, Today</span>
-								</div>
-								<div className="img-cont-msg">
-							<img src="https://hips.hearstapps.com/hmg-prod/images/frenchie-the-boys-season-3-1655812929.jpg?crop=0.253xw:0.380xh;0.580xw,0.0484xh&resize=980:*" className="rounded-circle user-img-msg"/>
+                {/* Sent Message */}
+							  <div className="d-flex justify-content-end mb-4">
+							  	<div className="msg-cotainer_send">
+							  		Hi Khalid i am good tnx how about you?
+							  		<span className="msg_time_send">8:55 AM, Today</span>
+							  	</div>
+							  	<div className="img-cont-msg">
+							  <img src="https://hips.hearstapps.com/hmg-prod/images/frenchie-the-boys-season-3-1655812929.jpg?crop=0.253xw:0.380xh;0.580xw,0.0484xh&resize=980:*" className="rounded-circle user-img-msg"/>
+							  	</div>
+							  </div>
 
-								</div>
-							</div>
-							<div className="d-flex justify-content-start mb-4">
-								<div className="img-cont-msg">
-									<img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg" className="rounded-circle user-img-msg"/>
-								</div>
-								<div className="msg-cotainer">
-									Bye, see you
-									<span className="msg_time">9:12 AM, Today</span>
-								</div>
-							</div>
+                {/* Received Message */}
+							  <div className="d-flex justify-content-start mb-4">
+							  	<div className="img-cont-msg">
+							  		<img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg" className="rounded-circle user-img-msg"/>
+							  	</div>
+							  	<div className="msg-cotainer">
+							  		I am good too, thank you for your chat template
+							  		<span className="msg_time">9:00 AM, Today</span>
+							  	</div>
+							  </div>
+
 						</div>
           </div>
           <form className='message-form'>
