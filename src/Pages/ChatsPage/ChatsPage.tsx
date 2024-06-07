@@ -42,40 +42,31 @@ function ChatsPage({ messages, currentUserId }: MessageProps) {
         <div className='chat-messages-container'>
           <div className='messages-box'>
 						<div className="card-body msg-card-body">
+              
+              {/* Received Message */}
 							<div className="d-flex justify-content-start mb-4">
-                {/* Received Message */}
 							  <div className="img-cont-msg">
-								  	<img src="https://hips.hearstapps.com/hmg-prod/images/frenchie-the-boys-season-3-1655812929.jpg?crop=0.253xw:0.380xh;0.580xw,0.0484xh&resize=980:*" className="rounded-circle user-img-msg"/>
-								  </div>
-								  <div className="msg-cotainer">
-								  	Hi, how are you samim?
-								    <span className="msg-time">8:40 AM, Today</span>
-								  </div>
+								  <img src="https://hips.hearstapps.com/hmg-prod/images/frenchie-the-boys-season-3-1655812929.jpg?crop=0.253xw:0.380xh;0.580xw,0.0484xh&resize=980:*" className="rounded-circle user-img-msg"/>
+								</div>
+							  <div className="msg-cotainer">
+							  	Hi, how are you samim?
+							    <span className="msg-time">8:40 AM, Today</span>
 							  </div>
+							</div>
 
-                {/* Sent Message */}
                 {/* Way to handle messages and to apply different styles is based on classname
-                ex: flex-row-reverse  */}
-							  <div className="d-flex justify-content-end flex-row-reverse mb-4">
-							  	<div className="msg-cotainer-send">
-							  		Hi Khalid i am good tnx how about you?
-							  		<span className="msg-time-send">8:55 AM, Today</span>
-							  	</div>
-							  	<div className="img-cont-msg">
-							      <img src="" className="rounded-circle user-img-msg"/>
-							  	</div>
-							  </div>
-
-                {/* Received Message */}
-							  <div className="d-flex justify-content-start mb-4">
-							  	<div className="img-cont-msg">
-							  		<img src="https://hips.hearstapps.com/hmg-prod/images/frenchie-the-boys-season-3-1655812929.jpg?crop=0.253xw:0.380xh;0.580xw,0.0484xh&resize=980:*" className="rounded-circle user-img-msg"/>
-							  	</div>
-							  	<div className="msg-cotainer">
-							  		I am good too, thank you for your chat template
-							  		<span className="msg-time">9:00 AM, Today</span>
-							  	</div>
-							  </div>
+                ex: for sent messages: d-flex justify-content-start flex-row-reverse
+                ex: for received messages: d-flex justify-content-start mb-4 */}
+                {/* Sent Message */}
+							<div className="d-flex justify-content-start flex-row-reverse mb-4">
+								<div className="img-cont-msg">
+							    <img src="" className="rounded-circle user-img-msg"/>
+								</div>
+								<div className="msg-cotainer-send">
+									Hi Khalid i am good tnx how about you?
+									<span className="msg-time-send">8:55 AM, Today</span>
+								</div>
+							</div>
 
 						</div>
           </div>
