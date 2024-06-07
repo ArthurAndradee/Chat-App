@@ -45,7 +45,7 @@ function ChatsPage({ messages, currentUserId }: MessageProps) {
 							<div className="d-flex justify-content-start mb-4">
                 {/* Received Message */}
 							  <div className="img-cont-msg">
-								  	<img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg" className="rounded-circle user-img-msg"/>
+								  	<img src="https://hips.hearstapps.com/hmg-prod/images/frenchie-the-boys-season-3-1655812929.jpg?crop=0.253xw:0.380xh;0.580xw,0.0484xh&resize=980:*" className="rounded-circle user-img-msg"/>
 								  </div>
 								  <div className="msg-cotainer">
 								  	Hi, how are you samim?
@@ -60,14 +60,14 @@ function ChatsPage({ messages, currentUserId }: MessageProps) {
 							  		<span className="msg-time-send">8:55 AM, Today</span>
 							  	</div>
 							  	<div className="img-cont-msg">
-							  <img src="https://hips.hearstapps.com/hmg-prod/images/frenchie-the-boys-season-3-1655812929.jpg?crop=0.253xw:0.380xh;0.580xw,0.0484xh&resize=980:*" className="rounded-circle user-img-msg"/>
+							  <img src="" className="rounded-circle user-img-msg"/>
 							  	</div>
 							  </div>
 
                 {/* Received Message */}
 							  <div className="d-flex justify-content-start mb-4">
 							  	<div className="img-cont-msg">
-							  		<img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg" className="rounded-circle user-img-msg"/>
+							  		<img src="https://hips.hearstapps.com/hmg-prod/images/frenchie-the-boys-season-3-1655812929.jpg?crop=0.253xw:0.380xh;0.580xw,0.0484xh&resize=980:*" className="rounded-circle user-img-msg"/>
 							  	</div>
 							  	<div className="msg-cotainer">
 							  		I am good too, thank you for your chat template
