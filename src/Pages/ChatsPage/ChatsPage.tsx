@@ -7,6 +7,7 @@ export interface Message {
   text: string;
   userId: number; // The ID of the user who sent the message
 }
+
 interface MessageProps {
   messages: Message[];
   currentUserId: number; // The ID of the current user
@@ -81,6 +82,7 @@ function ChatsPage({ messages, currentUserId }: MessageProps) {
         <div className='about-info'>
           <img className='chat-picture' src='https://hips.hearstapps.com/hmg-prod/images/frenchie-the-boys-season-3-1655812929.jpg?crop=0.253xw:0.380xh;0.580xw,0.0484xh&resize=980:*' alt='group-pic' />
           <div>Group Title</div>
+          <div className='bio'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur ipsum mauris, tristique et turpis sit amet, vestibulum consequat ante. Vestibulum eu augue at lectus semper vestibulum ut quis est. Interdum et malesuada fames ac ante ipsum primis in faucibus.</div>
         </div>
       </section>
       }

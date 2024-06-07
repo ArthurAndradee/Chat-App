@@ -197,3 +197,13 @@
     color: rgba(255,255,255,0.5);
     font-size: 10px;
 }
+
+.bio {
+    width: 15vw;
+    padding: 10px;
+    
+    margin: auto;
+    margin-top: 15px;
+
+    background-color: #464f5228;
+}
