@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/alt-text */
 import React, { useState, useEffect, FormEvent } from 'react';
 import io, { Socket } from 'socket.io-client';
 import './ChatPage.css';
@@ -90,7 +91,7 @@ const ChatsPage: React.FC<ChatsPageProps> = ({ username, profilePicture }) => {
       });
       setActiveChats((prevChats) => ({
           ...prevChats,
-          [roomId]: [...(prevChats[roomId] || []), { sender: 'You', message, timestamp, roomId }], // Include roomId in each message
+          [roomId]: [...(prevChats[roomId] || []), { sender: username, message, timestamp, roomId }], // Include roomId in each message
       }));
   };
   
@@ -125,16 +126,16 @@ const ChatsPage: React.FC<ChatsPageProps> = ({ username, profilePicture }) => {
                             <div className="messages-box">
                                 <div className="card-body msg-card-body">
                                     {activeChats[[username, currentRecipient].sort().join('-')]?.map((msg, index) => (
-                                        <div key={index} className={msg.sender === 'You' ? 'd-flex justify-content-start flex-row-reverse' : 'd-flex justify-content-start mb-4'}>
+                                        <div key={index} className={msg.sender === username ? 'd-flex justify-content-start flex-row-reverse' : 'd-flex justify-content-start mb-4'}>
                                             <div className="img-cont-msg">
-                                                <img src={msg.sender === 'You' ? profilePicture : users.find(user => user.username === msg.sender)?.profilePicture || ''} className="rounded-circle user-img-msg" />
+                                                <img src={msg.sender === username ? profilePicture : users.find(user => user.username === msg.sender)?.profilePicture || ''} className="rounded-circle user-img-msg" />
                                             </div>
                                             <div className='d-flex flex-column'>
                                                 <div className="msg-cotainer">
                                                     <span className='msg-content'>{msg.sender}</span>
                                                     <span>{msg.message}</span>
                                                 </div>
-                                                <span className={msg.sender === "You" ? 'msg-time-sent' : "msg-time-received"}>{msg.timestamp}</span>
+                                                <span className={msg.sender === username ? 'msg-time-sent' : "msg-time-received"}>{msg.timestamp}</span>
                                             </div>
                                         </div>
                                     ))}
