@@ -2,21 +2,27 @@ import { useState } from 'react';
 import './App.css';
 import AuthPage from './Pages/AuthPage/AuthPage';
 import ChatsPage from './Pages/ChatsPage/ChatsPage';
-import Bruh from './Pages/ChatsPage/ChatGPT';
 
 function App() {
-  const [username, setUsername] = useState<string | null>(null);
+  const [username, setUsername] = useState<string>('');
+  const [profilePicture, setProfilePicture] = useState<string>('');
+  const [loggedIn, setLoggedIn] = useState<boolean>(false);
 
-  const handleUsernameSubmit = (username: string) => {
-    setUsername(username);
-    console.log('Username submitted:', username);
+  const handleLogin = (username: string, profilePicture: string) => {
+      setUsername(username);
+      setProfilePicture(profilePicture);
+      setLoggedIn(true);
   };
 
-  if (!username) {
-    return <AuthPage onUsernameSubmit={handleUsernameSubmit}/>;
-  } else {
-    return <Bruh />;
-  }
+  return (
+    <div className="App">
+      {!loggedIn ? (
+          <AuthPage onLogin={handleLogin} />
+      ) : (
+          <ChatsPage username={username} profilePicture={profilePicture} />
+      )}
+    </div>
+  );
 }
 
 export default App;

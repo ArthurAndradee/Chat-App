@@ -1,25 +1,22 @@
-import React, { useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 import './AuthPage.css';
-
 interface AuthPageProps {
-  onUsernameSubmit: (username: string) => void;
+  onLogin: (username: string, profilePicture: string) => void;
 }
 
-function AuthPage({ onUsernameSubmit }: AuthPageProps) {
-  const [username, setUsername] = useState('');
+function AuthPage({ onLogin }: AuthPageProps) {
+  const [username, setUsername] = useState<string>('');
+  const [profilePicture, setProfilePicture] = useState<string>('');
 
-  const handleFormSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    if (username) { 
-      onUsernameSubmit(username);
-    } else {
-      alert('Please enter a valid username.');
-    }
+  const handleLogin = () => {
+      if (username) {
+          onLogin(username, profilePicture);
+      }
   };
 
   return (
     <div className="form-container">
-      <form className="from-card text-light" onSubmit={handleFormSubmit}>
+      <div className="from-card text-light">
         <h4 className="my-4">Bem Vindo 👋</h4>
         <div className="my-3">Insira seu nome para começar</div>
         <div className="">
@@ -28,13 +25,20 @@ function AuthPage({ onUsernameSubmit }: AuthPageProps) {
             className="username-input"
             placeholder="Seu nome aqui"
             value={username}
-            onChange={(e) => setUsername(e.target.value)}
+            onChange={(e: ChangeEvent<HTMLInputElement>) => setUsername(e.target.value)}
           />
-          <button className="btn btn-light w-100 my-3" type="submit">
+          <input
+            type="text"
+            className="username-input"
+            placeholder="Profile Picture URL"
+            value={profilePicture}
+            onChange={(e: ChangeEvent<HTMLInputElement>) => setProfilePicture(e.target.value)}
+          />
+          <button className="btn btn-light w-100 my-3" onClick={handleLogin}>
             Entrar
           </button>
         </div>
-      </form>
+      </div>
     </div>
   );
 }
