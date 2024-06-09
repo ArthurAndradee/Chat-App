@@ -2,6 +2,7 @@ import { useState } from 'react';
 import './App.css';
 import AuthPage from './Pages/AuthPage/AuthPage';
 import ChatsPage from './Pages/ChatsPage/ChatsPage';
+import Bruh from './Pages/ChatsPage/ChatGPT';
 
 function App() {
   const [username, setUsername] = useState<string | null>(null);
@@ -14,7 +15,7 @@ function App() {
   if (!username) {
     return <AuthPage onUsernameSubmit={handleUsernameSubmit}/>;
   } else {
-    return <ChatsPage messages={[]} currentUserId={0}/>;
+    return <Bruh />;
   }
 }
 
