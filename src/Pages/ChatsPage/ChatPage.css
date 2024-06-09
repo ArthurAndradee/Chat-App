@@ -34,8 +34,9 @@
         width: 25vw;
 
         padding: 20px;
+        margin: 1vh 0;
 
-        background-color: #82828269;
+        background-color: #8282823a;
         border-radius: 25px;
     }
 }
@@ -47,6 +48,7 @@
     padding: 20px;
 
     margin-top: 20px;
+    border-radius: 25px;
 
     background: rgb(142,142,142);
     background: -moz-linear-gradient(0deg, rgba(142,142,142,0.08883443940121472) 51%, rgba(206,206,206,0) 100%);
@@ -160,42 +162,41 @@
 .img-cont-msg {
     height: 40px;
     width: 40px;
+
+    margin-top: 10px;
 }
 
 .msg-cotainer {
-    margin-top: auto;
-    margin-bottom: auto;
-    margin-left: 10px;
+    margin: auto 10px auto 10px;
+
     border-radius: 25px;
     background-color: #3d444654;
-    padding: 10px;
+    padding: 1rem;
+
     position: relative;
+    display: flex;
+    flex-direction: column;
+    
+    .msg-content {
+        font-size: 0.75rem;
+        color: rgba(255,255,255,0.5);
+    }
 }
 
-.msg-time {
-    position: absolute;
-    left: 0;
-    bottom: -15px;
+    
+.msg-time-received, .msg-time-sent {
     color: rgba(255,255,255,0.5);
     font-size: 10px;
 }
 
-.msg-cotainer-send {
-    margin-top: auto;
-    margin-bottom: auto;
-    margin-right: 10px;
-    border-radius: 25px;
-    background-color: #a6738764;
-    padding: 10px;
-    position: relative;
+.msg-time-received {
+    margin-right: auto;
+    margin-left: 1rem;
 }
-
-.msg-time-send {
-    position: absolute;
-    right: 0;
-    bottom: -15px;
-    color: rgba(255,255,255,0.5);
-    font-size: 10px;
+    
+.msg-time-sent {
+    margin-left: auto;
+    margin-right: 1rem;
 }
 
 .bio {
