@@ -35,7 +35,11 @@ const ChatsPage: React.FC<ChatsPageProps> = ({ username, profilePicture }) => {
         socket.emit('join', { username, profilePicture });
 
         socket.on('users', (usersList: User[]) => {
-            setUsers(usersList);
+            const uniqueUsers = Array.from(new Set(usersList.map(user => user.username)))
+                .map(username => {
+                    return usersList.find(user => user.username === username)!;
+                });
+            setUsers(uniqueUsers);
         });
 
         socket.on('userLeft', (leftUser: string) => {
