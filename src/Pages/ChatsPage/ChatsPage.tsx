@@ -195,7 +195,8 @@ const ChatsPage: React.FC<ChatsPageProps> = ({ username, profilePicture }) => {
               src={currentRecipientUser ? getProfilePictureUrl(currentRecipientUser.profilePicture) : ''}
               alt="group-pic"
             />
-            <div>Group Title</div>
+            <div>{currentRecipient}</div>
+            <div>UUID</div>
             <div className="bio">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur ipsum mauris, tristique et turpis sit amet, vestibulum consequat ante. Vestibulum eu augue at lectus semper vestibulum ut quis est. Interdum et malesuada fames ac ante ipsum primis in faucibus.</div>
           </div>
         </section>
