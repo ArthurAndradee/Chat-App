@@ -103,7 +103,8 @@ const ChatsPage: React.FC<ChatsPageProps> = ({ username, profilePicture }) => {
 
   const sendMessage = (message: string) => {
     const roomId = [username, currentRecipient].sort().join('-');
-    const timestamp = new Date().toLocaleTimeString();
+    const timestamp = new Date().toLocaleDateString();
+    //TODO: GET CURRENT HOUR INSTEAD OF DAY
     socket.emit('privateMessage', {
       recipient: currentRecipient,
       message,
