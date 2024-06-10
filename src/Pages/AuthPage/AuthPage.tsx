@@ -1,5 +1,9 @@
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useState, useEffect } from 'react';
+import io, { Socket } from 'socket.io-client';
 import './AuthPage.css';
+import { User } from '../ChatsPage/ChatsPage';
+
+const socket: Socket = io('http://localhost:5000');
 
 interface AuthPageProps {
   onLogin: (username: string, profilePicture: File | null) => void;
@@ -8,13 +12,30 @@ interface AuthPageProps {
 function AuthPage({ onLogin }: AuthPageProps) {
   const [username, setUsername] = useState<string>('');
   const [profilePicture, setProfilePicture] = useState<File | null>(null);
+  const [usernames, setUsernames] = useState<string[]>([]);
+
+  useEffect(() => {
+    socket.on('users', (usersList: User[]) => {
+      setUsernames(usersList.map(user => user.username));
+    });
+
+    return () => {
+      socket.off('users');
+    };
+  }, []);
 
   const handleLogin = () => {
-    if (username && profilePicture) {
-      onLogin(username, profilePicture);
-    } else {
+    if (!username || !profilePicture) {
       alert('Please enter your username and upload a profile picture.');
+      return;
     }
+
+    if (usernames.includes(username)) {
+      alert('Username already exists. Please choose a different one.');
+      return;
+    }
+
+    onLogin(username, profilePicture);
   };
 
   const handleFileUpload = (e: ChangeEvent<HTMLInputElement>) => {

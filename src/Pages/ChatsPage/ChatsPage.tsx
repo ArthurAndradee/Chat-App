@@ -17,7 +17,7 @@ interface ActiveChats {
   [key: string]: Message[];
 }
 
-interface User {
+export interface User {
   username: string;
   profilePicture: File | ArrayBuffer | null;
 }
@@ -48,10 +48,16 @@ const ChatsPage: React.FC<ChatsPageProps> = ({ username, profilePicture }) => {
     setShowAboutContainer(prevState => !prevState);
   };
 
+// Inside the existing useEffect in ChatsPage
+
   useEffect(() => {
+    
     if (username && profilePicture) {
       socket.emit('join', { username, profilePicture });
     }
+
+    // Send the current list of users to the AuthPage
+    socket.emit('getUsers');
 
     socket.on('users', (usersList: User[]) => {
       const uniqueUsers = Array.from(new Set(usersList.map(user => user.username)))
