@@ -33,7 +33,9 @@ const ChatsPage: React.FC<ChatsPageProps> = ({ username, profilePicture }) => {
   const [currentRecipient, setCurrentRecipient] = useState<string>('');
 
   const getProfilePictureUrl = (profilePicture: File | ArrayBuffer | null) => {
-  if (profilePicture instanceof ArrayBuffer) {
+    if (profilePicture instanceof File) {
+      return URL.createObjectURL(profilePicture);
+    } else if (profilePicture instanceof ArrayBuffer) {
       return URL.createObjectURL(new Blob([profilePicture]));
     }
     return '';
@@ -104,6 +106,8 @@ const ChatsPage: React.FC<ChatsPageProps> = ({ username, profilePicture }) => {
     }));
   };
 
+  const currentRecipientUser = users.find(user => user.username === currentRecipient);
+
   return (
     <div className="sections-container">
       <section className="contacts-container">
@@ -126,12 +130,12 @@ const ChatsPage: React.FC<ChatsPageProps> = ({ username, profilePicture }) => {
         {currentRecipient && (
           <>
             <header className="d-flex">
-              {profilePicture && (
+              {currentRecipientUser?.profilePicture && (
                 <img
                   className="chat-picture"
                   onClick={() => setShowAboutContainer(!showAboutContainer)}
-                  src={getProfilePictureUrl(profilePicture)}
-                  alt={username}
+                  src={getProfilePictureUrl(currentRecipientUser.profilePicture)}
+                  alt={currentRecipient}
                 />
               )}
               <div className="chat-info">
@@ -186,7 +190,11 @@ const ChatsPage: React.FC<ChatsPageProps> = ({ username, profilePicture }) => {
       {showAboutContainer && (
         <section className="about-container">
           <div className="about-info">
-            <img className="chat-picture" src="" alt="group-pic" />
+            <img
+              className="chat-picture"
+              src={currentRecipientUser ? getProfilePictureUrl(currentRecipientUser.profilePicture) : ''}
+              alt="group-pic"
+            />
             <div>Group Title</div>
             <div className="bio">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur ipsum mauris, tristique et turpis sit amet, vestibulum consequat ante. Vestibulum eu augue at lectus semper vestibulum ut quis est. Interdum et malesuada fames ac ante ipsum primis in faucibus.</div>
           </div>
