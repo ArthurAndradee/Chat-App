@@ -48,7 +48,6 @@ const ChatsPage: React.FC<ChatsPageProps> = ({ username, profilePicture }) => {
     setShowAboutContainer(prevState => !prevState);
   };
 
-// Inside the existing useEffect in ChatsPage
 
   useEffect(() => {
     
@@ -56,7 +55,6 @@ const ChatsPage: React.FC<ChatsPageProps> = ({ username, profilePicture }) => {
       socket.emit('join', { username, profilePicture });
     }
 
-    // Send the current list of users to the AuthPage
     socket.emit('getUsers');
 
     socket.on('users', (usersList: User[]) => {
