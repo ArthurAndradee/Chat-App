@@ -16,7 +16,7 @@ interface ActiveChats {
 
 interface User {
   username: string;
-  profilePicture: File | null;
+  profilePicture: File | ArrayBuffer | null;
 }
 
 interface ChatsPageProps {
@@ -32,9 +32,15 @@ const ChatsPage: React.FC<ChatsPageProps> = ({ username, profilePicture }) => {
   const [activeChats, setActiveChats] = useState<ActiveChats>({});
   const [currentRecipient, setCurrentRecipient] = useState<string>('');
 
+  const getProfilePictureUrl = (profilePicture: File | ArrayBuffer | null) => {
+  if (profilePicture instanceof ArrayBuffer) {
+      return URL.createObjectURL(new Blob([profilePicture]));
+    }
+    return '';
+  };
+
   useEffect(() => {
     if (username && profilePicture) {
-
       socket.emit('join', { username, profilePicture });
     }
 
@@ -107,7 +113,7 @@ const ChatsPage: React.FC<ChatsPageProps> = ({ username, profilePicture }) => {
         {users.filter(user => user.username !== username).map((user, index) => (
           <div key={index} className="contact-container d-flex" onClick={() => startChat(user.username)}>
             {user.profilePicture &&
-              <img className="chat-picture" src={URL.createObjectURL(new Blob([user.profilePicture]))} alt={user.username} />
+              <img className="chat-picture" src={getProfilePictureUrl(user.profilePicture)} alt={user.username} />
             }
             <div className="chat-info">
               <div className="chat-name">{user.username}</div>
@@ -124,8 +130,7 @@ const ChatsPage: React.FC<ChatsPageProps> = ({ username, profilePicture }) => {
                 <img
                   className="chat-picture"
                   onClick={() => setShowAboutContainer(!showAboutContainer)}
-                  src={''}
-                  //TODO LATER
+                  src={getProfilePictureUrl(profilePicture)}
                   alt={username}
                 />
               )}
@@ -140,8 +145,11 @@ const ChatsPage: React.FC<ChatsPageProps> = ({ username, profilePicture }) => {
                   {activeChats[[username, currentRecipient].sort().join('-')]?.map((msg, index) => (
                     <div key={index} className={msg.sender === username ? 'd-flex justify-content-start flex-row-reverse' : 'd-flex justify-content-start mb-4'}>
                       <div className="img-cont-msg">
-                        {profilePicture && (
-                          <img src={'TODO LATER'} className="rounded-circle user-img-msg" />
+                        {users.find(user => user.username === msg.sender)?.profilePicture && (
+                          <img
+                            src={getProfilePictureUrl(users.find(user => user.username === msg.sender)!.profilePicture)}
+                            className="rounded-circle user-img-msg"
+                          />
                         )}
                       </div>
                       <div className='d-flex flex-column'>
@@ -175,17 +183,17 @@ const ChatsPage: React.FC<ChatsPageProps> = ({ username, profilePicture }) => {
           </>
         )}
       </section>
-            {showAboutContainer && (
-                <section className="about-container">
-                    <div className="about-info">
-                        <img className="chat-picture" src={''} alt="group-pic" />
-                        <div>Group Title</div>
-                        <div className="bio">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur ipsum mauris, tristique et turpis sit amet, vestibulum consequat ante. Vestibulum eu augue at lectus semper vestibulum ut quis est. Interdum et malesuada fames ac ante ipsum primis in faucibus.</div>
-                    </div>
-                </section>
-            )}
-        </div>
-    );
-}
+      {showAboutContainer && (
+        <section className="about-container">
+          <div className="about-info">
+            <img className="chat-picture" src="" alt="group-pic" />
+            <div>Group Title</div>
+            <div className="bio">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur ipsum mauris, tristique et turpis sit amet, vestibulum consequat ante. Vestibulum eu augue at lectus semper vestibulum ut quis est. Interdum et malesuada fames ac ante ipsum primis in faucibus.</div>
+          </div>
+        </section>
+      )}
+    </div>
+  );
+};
 
 export default ChatsPage;
