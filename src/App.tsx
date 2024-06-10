@@ -5,21 +5,21 @@ import ChatsPage from './Pages/ChatsPage/ChatsPage';
 
 function App() {
   const [username, setUsername] = useState<string>('');
-  const [profilePicture, setProfilePicture] = useState<string>('');
+  const [profilePicture, setProfilePicture] = useState<File | null>(null);
   const [loggedIn, setLoggedIn] = useState<boolean>(false);
 
-  const handleLogin = (username: string, profilePicture: string) => {
-      setUsername(username);
-      setProfilePicture(profilePicture);
-      setLoggedIn(true);
+  const handleLogin = (username: string, profilePicture: File | null) => {
+    setUsername(username);
+    setProfilePicture(profilePicture);
+    setLoggedIn(true);
   };
 
   return (
     <div className="App">
       {!loggedIn ? (
-          <AuthPage onLogin={handleLogin} />
+        <AuthPage onLogin={handleLogin} />
       ) : (
-          <ChatsPage username={username} profilePicture={profilePicture} />
+        <ChatsPage username={username} profilePicture={profilePicture} />
       )}
     </div>
   );
