@@ -34,6 +34,7 @@ const ChatsPage: React.FC<ChatsPageProps> = ({ username, profilePicture }) => {
 
   useEffect(() => {
     if (username && profilePicture) {
+
       socket.emit('join', { username, profilePicture });
     }
 
@@ -105,8 +106,8 @@ const ChatsPage: React.FC<ChatsPageProps> = ({ username, profilePicture }) => {
         </header>
         {users.filter(user => user.username !== username).map((user, index) => (
           <div key={index} className="contact-container d-flex" onClick={() => startChat(user.username)}>
-            {profilePicture &&
-              <img className="chat-picture" src={URL.createObjectURL(profilePicture)} alt={user.username} />
+            {user.profilePicture &&
+              <img className="chat-picture" src={URL.createObjectURL(new Blob([user.profilePicture]))} alt={user.username} />
             }
             <div className="chat-info">
               <div className="chat-name">{user.username}</div>
