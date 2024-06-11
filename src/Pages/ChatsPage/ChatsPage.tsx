@@ -79,6 +79,7 @@ const ChatsPage: React.FC<ChatsPageProps> = ({ username, profilePicture }) => {
     });
 
     socket.on('loadMessages', (messages: Message[]) => {
+      console.log("Messages loaded: " + messages)
       const roomId = messages.length > 0 ? messages[0].roomId : '';
       setActiveChats((prevChats) => ({
         ...prevChats,
