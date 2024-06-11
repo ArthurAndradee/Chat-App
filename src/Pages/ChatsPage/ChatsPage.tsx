@@ -84,7 +84,8 @@ const ChatsPage: React.FC<ChatsPageProps> = ({ username, profilePicture }) => {
       setActiveChats((prevChats) => ({
         ...prevChats,
         [roomId]: messages,
-      }));
+        }));
+      console.log("Active Chats: " + activeChats)
     });
 
     return () => {
@@ -103,7 +104,7 @@ const ChatsPage: React.FC<ChatsPageProps> = ({ username, profilePicture }) => {
 
   const sendMessage = (message: string) => {
     const roomId = [username, currentRecipient].sort().join('-');
-    const timestamp = new Date().toLocaleTimeString().toString();
+    const timestamp = new Date().toLocaleTimeString();
     console.log('Client sending message:', { recipient: currentRecipient, message, sender: username, timestamp, roomId });
     socket.emit('privateMessage', {
         recipient: currentRecipient,
