@@ -25,16 +25,6 @@ function AuthPage({ onLogin }: AuthPageProps) {
   }, []);
 
   const handleLogin = () => {
-    if (!username || !profilePicture) {
-      alert('Please enter your username and upload a profile picture.');
-      return;
-    }
-
-    if (usernames.includes(username)) {
-      alert('Username already exists. Please choose a different one.');
-      return;
-    }
-
     onLogin(username, profilePicture);
   };
 

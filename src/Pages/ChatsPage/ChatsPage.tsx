@@ -70,6 +70,7 @@ const ChatsPage: React.FC<ChatsPageProps> = ({ username, profilePicture }) => {
     });
 
     socket.on('receiveMessage', (data: { sender: string; message: string; roomId: string; timestamp: string }) => {
+      console.log('Client received message:', data);
       const { sender, message, roomId, timestamp } = data;
       setActiveChats((prevChats) => ({
         ...prevChats,
@@ -95,28 +96,26 @@ const ChatsPage: React.FC<ChatsPageProps> = ({ username, profilePicture }) => {
 
   const startChat = (recipient: string) => {
     const roomId = [username, recipient].sort().join('-');
-    if (!activeChats[roomId]) {
-      socket.emit('fetchMessages', roomId);
-    }
+    socket.emit('fetchMessages', roomId);
     setCurrentRecipient(recipient);
   };
 
   const sendMessage = (message: string) => {
     const roomId = [username, currentRecipient].sort().join('-');
-    const timestamp = new Date().toLocaleDateString();
-    //TODO: GET CURRENT HOUR INSTEAD OF DAY
+    const timestamp = new Date().toLocaleTimeString().toString();
+    console.log('Client sending message:', { recipient: currentRecipient, message, sender: username, timestamp, roomId });
     socket.emit('privateMessage', {
-      recipient: currentRecipient,
-      message,
-      sender: username,
-      timestamp,
-      roomId,
+        recipient: currentRecipient,
+        message,
+        sender: username,
+        timestamp,
+        roomId,
     });
-    setActiveChats((prevChats) => ({
-      ...prevChats,
-      [roomId]: [...(prevChats[roomId] || []), { sender: username, message, timestamp, roomId }],
+    setActiveChats(prevChats => ({
+        ...prevChats,
+        [roomId]: [...(prevChats[roomId] || []), { sender: username, message, timestamp, roomId }],
     }));
-  };
+};
 
   return (
     <div className="sections-container">
