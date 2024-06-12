@@ -18,7 +18,7 @@ interface ActiveChats {
 
 export interface User {
     username: string; 
-    profilePicture: string | null; //BRUH
+    profilePicture: string | null;
 }
 
 interface ChatsPageProps {
