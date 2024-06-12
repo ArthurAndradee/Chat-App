@@ -20,6 +20,7 @@ const ContactsContainer: React.FC<ContactsContainerProps> = ({ username, users, 
       </header>
       {users.filter(user => user.username !== username).map((user, index) => (
         <div key={index} className="contact-container d-flex" onClick={() => startChat(user.username)}>
+          <div>{getProfilePictureUrl(user.profilePicture)}</div>
           {user.profilePicture &&
             <img className="chat-picture" src={getProfilePictureUrl(user.profilePicture)} alt={user.username} />
           }

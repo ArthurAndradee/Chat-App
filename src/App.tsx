@@ -10,7 +10,9 @@ function App() {
 
   const handleLogin = (username: string, profilePicture: File | null) => {
     setUsername(username);
+    console.log(username)
     setProfilePicture(profilePicture);
+    console.log(profilePicture)
     setLoggedIn(true);
   };
 

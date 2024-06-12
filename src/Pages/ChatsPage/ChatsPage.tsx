@@ -34,13 +34,24 @@ const ChatsPage: React.FC<ChatsPageProps> = ({ username, profilePicture }) => {
     const [activeChats, setActiveChats] = useState<ActiveChats>({});
     const [currentRecipient, setCurrentRecipient] = useState<string>('');
 
-    const getProfilePictureUrl = (profilePicture: File | ArrayBuffer | null) => {
-        if (profilePicture instanceof File) {
-            return URL.createObjectURL(profilePicture);
-        } else if (profilePicture instanceof ArrayBuffer) {
-            return URL.createObjectURL(new Blob([profilePicture]));
-        }
-        return '';
+    const getProfilePictureUrl = (profilePicture: File | ArrayBuffer | null): string => {
+      
+      console.log(profilePicture)
+      if (profilePicture instanceof File) {
+        // If the profile picture is already a File, return its URL
+        return URL.createObjectURL(profilePicture);
+      } else if (profilePicture instanceof Buffer) {
+        // Convert the Buffer to a base64 string
+        const base64String = profilePicture.toString('base64');
+        // Construct the data URL
+        return `data:image/jpeg;base64,${base64String}`;
+      } else if (profilePicture instanceof ArrayBuffer) {
+        // If the profile picture is a binary base64 string, convert it to a data URL
+        const base64String = Buffer.from(profilePicture).toString('base64');
+        return `data:image/jpeg;base64,${base64String}`;
+      }
+      // Default case: return an empty string
+      return 'aaaa';
     };
 
     const toggleAboutContainer = () => {

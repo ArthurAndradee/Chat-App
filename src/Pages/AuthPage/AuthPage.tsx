@@ -2,6 +2,7 @@ import { ChangeEvent, useState, useEffect } from 'react';
 import io, { Socket } from 'socket.io-client';
 import './AuthPage.css';
 import { User } from '../ChatsPage/ChatsPage';
+import { eventNames } from 'process';
 
 const socket: Socket = io('http://localhost:5000');
 
@@ -30,7 +31,8 @@ function AuthPage({ onLogin }: AuthPageProps) {
 
   const handleFileUpload = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
-      setProfilePicture(e.target.files[0]);
+      const selectedProfilePicture = e.target.files[0]
+      setProfilePicture(selectedProfilePicture);
     }
   };
 
