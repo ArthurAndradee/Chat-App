@@ -2,17 +2,17 @@ import React from 'react';
 
 interface User {
   username: string;
-  profilePicture: File | ArrayBuffer | null;
+  profilePicture: string | null
 }
 
 interface ContactsContainerProps {
   username: string;
+  profilePicture: string | null;
   users: User[];
   startChat: (recipient: string) => void;
-  getProfilePictureUrl: (profilePicture: File | ArrayBuffer | null) => string;
 }
 
-const ContactsContainer: React.FC<ContactsContainerProps> = ({ username, users, startChat, getProfilePictureUrl }) => {
+const ContactsContainer: React.FC<ContactsContainerProps> = ({ username, profilePicture, users, startChat }) => {
   return (
     <section className="contacts-container">
       <header className="d-flex search-container">
@@ -20,9 +20,8 @@ const ContactsContainer: React.FC<ContactsContainerProps> = ({ username, users, 
       </header>
       {users.filter(user => user.username !== username).map((user, index) => (
         <div key={index} className="contact-container d-flex" onClick={() => startChat(user.username)}>
-          <div>{getProfilePictureUrl(user.profilePicture)}</div>
           {user.profilePicture &&
-            <img className="chat-picture" src={getProfilePictureUrl(user.profilePicture)} alt={user.username} />
+            <img className="chat-picture" src={user.profilePicture} alt={user.username} />
           }
           <div className="chat-info">
             <div className="chat-name">{user.username}</div>

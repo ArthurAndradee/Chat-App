@@ -2,17 +2,17 @@ import React from 'react';
 
 interface User {
   username: string;
-  profilePicture: File | ArrayBuffer | null;
+  profilePicture: string | null;
 }
 
 interface AboutContainerProps {
   currentRecipient: string;
+  profilePicture: string | null;
   users: User[];
   showAboutContainer: boolean;
-  getProfilePictureUrl: (profilePicture: File | ArrayBuffer | null) => string;
 }
 
-const AboutContainer: React.FC<AboutContainerProps> = ({ currentRecipient, users, showAboutContainer, getProfilePictureUrl }) => {
+const AboutContainer: React.FC<AboutContainerProps> = ({ currentRecipient, profilePicture, users, showAboutContainer }) => {
   const currentRecipientUser = users.find(user => user.username === currentRecipient);
 
   return (
@@ -22,7 +22,7 @@ const AboutContainer: React.FC<AboutContainerProps> = ({ currentRecipient, users
           <div className="about-info">
             <img
               className="chat-picture"
-              src={currentRecipientUser ? getProfilePictureUrl(currentRecipientUser.profilePicture) : ''}
+              src={currentRecipientUser?.profilePicture || ''}
               alt="group-pic"
             />
             <div>Group Title</div>

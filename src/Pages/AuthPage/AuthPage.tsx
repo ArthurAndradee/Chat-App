@@ -1,41 +1,33 @@
-import { ChangeEvent, useState, useEffect } from 'react';
-import io, { Socket } from 'socket.io-client';
+import { ChangeEvent, useState } from 'react';
 import './AuthPage.css';
-import { User } from '../ChatsPage/ChatsPage';
-import { eventNames } from 'process';
-
-const socket: Socket = io('http://localhost:5000');
 
 interface AuthPageProps {
-  onLogin: (username: string, profilePicture: File | null) => void;
+  onLogin: (username: string, profilePicture: string | null) => void;
 }
 
 function AuthPage({ onLogin }: AuthPageProps) {
   const [username, setUsername] = useState<string>('');
-  const [profilePicture, setProfilePicture] = useState<File | null>(null);
-  const [usernames, setUsernames] = useState<string[]>([]);
-
-  useEffect(() => {
-    socket.on('users', (usersList: User[]) => {
-      setUsernames(usersList.map(user => user.username));
-    });
-
-    return () => {
-      socket.off('users');
-    };
-  }, []);
-
+  const [profilePicture, setProfilePicture] = useState<string | null>(null);
   const handleLogin = () => {
     onLogin(username, profilePicture);
   };
 
   const handleFileUpload = (e: ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files.length > 0) {
-      const selectedProfilePicture = e.target.files[0]
-      setProfilePicture(selectedProfilePicture);
+    const selectedProfilePicture = e.target.files?.[0]
+    if (selectedProfilePicture) {
+      convertToBase64(selectedProfilePicture)
     }
   };
-
+  
+  function convertToBase64(file: File) {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onloadend = () => {
+      const base64String = reader.result as string;
+      setProfilePicture(base64String)
+    };
+  }
+      
   return (
     <div className="form-container">
       <div className="form-card text-light">
@@ -48,6 +40,7 @@ function AuthPage({ onLogin }: AuthPageProps) {
             placeholder="Seu nome aqui"
             value={username}
             onChange={(e: ChangeEvent<HTMLInputElement>) => setUsername(e.target.value)}
+            accept='.jpeg, .png, .jpg'
             required
           />
           <div className='d-flex flex-row'>
@@ -59,7 +52,7 @@ function AuthPage({ onLogin }: AuthPageProps) {
               onChange={handleFileUpload}
               required
             />
-            {profilePicture && <img src={URL.createObjectURL(profilePicture)} alt='Profile Preview' className='picture-preview' />}
+            {profilePicture && <img src={profilePicture} alt='Profile Preview' className='picture-preview' />}
           </div>
           <button className="btn btn-light w-100 my-3" onClick={handleLogin}>
             Entrar

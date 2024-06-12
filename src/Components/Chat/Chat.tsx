@@ -10,16 +10,16 @@ interface Message {
 
 interface User {
   username: string;
-  profilePicture: File | ArrayBuffer | null;
+  profilePicture: string | null;
 }
 
 interface ChatContainerProps {
   username: string;
+  profilePicture: string | null;
   currentRecipient: string;
   users: User[];
   activeChats: { [key: string]: Message[] };
   sendMessage: (message: string) => void;
-  getProfilePictureUrl: (profilePicture: File | ArrayBuffer | null) => string;
   toggleAboutContainer: () => void;
 }
 
@@ -29,7 +29,6 @@ const ChatContainer: React.FC<ChatContainerProps> = ({
   users,
   activeChats,
   sendMessage,
-  getProfilePictureUrl,
   toggleAboutContainer
 }) => {
   const currentRecipientUser = users.find(user => user.username === currentRecipient);
@@ -42,7 +41,7 @@ const ChatContainer: React.FC<ChatContainerProps> = ({
             {currentRecipientUser?.profilePicture && (
               <img
                 className="chat-picture"
-                src={getProfilePictureUrl(currentRecipientUser.profilePicture)}
+                src={currentRecipientUser.profilePicture}
                 alt={currentRecipient}
                 onClick={toggleAboutContainer}
               />
@@ -55,25 +54,28 @@ const ChatContainer: React.FC<ChatContainerProps> = ({
           <div className="chat-messages-container">
             <div className="messages-box">
               <div className="card-body msg-card-body">
-                {activeChats[[username, currentRecipient].sort().join('-')]?.map((msg, index) => (
-                  <div key={index} className={msg.sender === username ? 'd-flex justify-content-start flex-row-reverse' : 'd-flex justify-content-start mb-4'}>
-                    <div className="img-cont-msg">
-                      {users.find(user => user.username === msg.sender)?.profilePicture && (
-                        <img
-                          src={getProfilePictureUrl(users.find(user => user.username === msg.sender)!.profilePicture)}
-                          className="rounded-circle user-img-msg"
-                        />
-                      )}
-                    </div>
-                    <div className='d-flex flex-column'>
-                      <div className="msg-cotainer">
-                        <span className='msg-content'>{msg.sender}</span>
-                        <span>{msg.message}</span>
+              {activeChats[[username, currentRecipient].sort().join('-')]?.map((msg, index) => {
+                  const senderUser = users.find(user => user.username === msg.sender);
+                  return (
+                    <div key={index} className={msg.sender === username ? 'd-flex justify-content-start flex-row-reverse' : 'd-flex justify-content-start mb-4'}>
+                      <div className="img-cont-msg">
+                        {senderUser?.profilePicture && (
+                          <img
+                            src={senderUser.profilePicture}
+                            className="rounded-circle user-img-msg"
+                          />
+                        )}
                       </div>
-                      <span className={msg.sender === username ? 'msg-time-sent' : "msg-time-received"}>{msg.timestamp}</span>
+                      <div className='d-flex flex-column'>
+                        <div className="msg-cotainer">
+                          <span className='msg-content'>{msg.sender}</span>
+                          <span>{msg.message}</span>
+                        </div>
+                        <span className={msg.sender === username ? 'msg-time-sent' : "msg-time-received"}>{msg.timestamp}</span>
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             </div>
             <form className="message-form" onSubmit={(e: FormEvent) => {

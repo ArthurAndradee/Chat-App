@@ -5,14 +5,12 @@ import ChatsPage from './Pages/ChatsPage/ChatsPage';
 
 function App() {
   const [username, setUsername] = useState<string>('');
-  const [profilePicture, setProfilePicture] = useState<File | null>(null);
+  const [profilePicture, setProfilePicture] = useState<string | null>(null);
   const [loggedIn, setLoggedIn] = useState<boolean>(false);
 
-  const handleLogin = (username: string, profilePicture: File | null) => {
+  const handleLogin = (username: string, profilePicture: string | null) => {
     setUsername(username);
-    console.log(username)
-    setProfilePicture(profilePicture);
-    console.log(profilePicture)
+    setProfilePicture(profilePicture)
     setLoggedIn(true);
   };
 
@@ -21,7 +19,7 @@ function App() {
       {!loggedIn ? (
         <AuthPage onLogin={handleLogin} />
       ) : (
-        <ChatsPage username={username} profilePicture={profilePicture} />
+        <ChatsPage username={username} profilePicture={profilePicture}/>
       )}
     </div>
   );

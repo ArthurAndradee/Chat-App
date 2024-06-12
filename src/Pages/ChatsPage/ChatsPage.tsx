@@ -17,13 +17,13 @@ interface ActiveChats {
 }
 
 export interface User {
-    username: string;
-    profilePicture: File | ArrayBuffer | null;
+    username: string; 
+    profilePicture: string | null; //BRUH
 }
 
 interface ChatsPageProps {
     username: string;
-    profilePicture: File | null;
+    profilePicture: string | null;
 }
 
 const socket: Socket = io('http://localhost:5000');
@@ -33,26 +33,6 @@ const ChatsPage: React.FC<ChatsPageProps> = ({ username, profilePicture }) => {
     const [users, setUsers] = useState<User[]>([]);
     const [activeChats, setActiveChats] = useState<ActiveChats>({});
     const [currentRecipient, setCurrentRecipient] = useState<string>('');
-
-    const getProfilePictureUrl = (profilePicture: File | ArrayBuffer | null): string => {
-      
-      console.log(profilePicture)
-      if (profilePicture instanceof File) {
-        // If the profile picture is already a File, return its URL
-        return URL.createObjectURL(profilePicture);
-      } else if (profilePicture instanceof Buffer) {
-        // Convert the Buffer to a base64 string
-        const base64String = profilePicture.toString('base64');
-        // Construct the data URL
-        return `data:image/jpeg;base64,${base64String}`;
-      } else if (profilePicture instanceof ArrayBuffer) {
-        // If the profile picture is a binary base64 string, convert it to a data URL
-        const base64String = Buffer.from(profilePicture).toString('base64');
-        return `data:image/jpeg;base64,${base64String}`;
-      }
-      // Default case: return an empty string
-      return 'aaaa';
-    };
 
     const toggleAboutContainer = () => {
         setShowAboutContainer(prevState => !prevState);
@@ -104,7 +84,7 @@ const ChatsPage: React.FC<ChatsPageProps> = ({ username, profilePicture }) => {
             socket.off('receiveMessage');
             socket.off('loadMessages');
         };
-    }, [username, profilePicture]);
+    }, [profilePicture, username]);
 
     const startChat = (recipient: string) => {
         const roomId = [username, recipient].sort().join('-');
@@ -134,24 +114,24 @@ const ChatsPage: React.FC<ChatsPageProps> = ({ username, profilePicture }) => {
         <div className="sections-container">
             <ContactsContainer
                 username={username}
+                profilePicture={profilePicture}            
                 users={users}
-                startChat={startChat}
-                getProfilePictureUrl={getProfilePictureUrl}
+                startChat={startChat} 
             />
             <ChatContainer
                 username={username}
+                profilePicture={profilePicture}            
                 currentRecipient={currentRecipient}
                 users={users}
                 activeChats={activeChats}
                 sendMessage={sendMessage}
-                getProfilePictureUrl={getProfilePictureUrl}
-                toggleAboutContainer={toggleAboutContainer}
+                toggleAboutContainer={toggleAboutContainer} 
             />
             <AboutContainer
                 currentRecipient={currentRecipient}
+                profilePicture={profilePicture}            
                 users={users}
-                showAboutContainer={showAboutContainer}
-                getProfilePictureUrl={getProfilePictureUrl}
+                showAboutContainer={showAboutContainer} 
             />
         </div>
     );
