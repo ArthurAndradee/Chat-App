@@ -12,10 +12,9 @@ interface ContactsContainerProps {
   users: User[];
   startChat: (recipient: string) => void;
   latestMessages: { [key: string]: Message | null };
-  isUserOnline: (username: string) => boolean;
 }
 
-const ContactsContainer: React.FC<ContactsContainerProps> = ({ username, profilePicture, users, startChat, latestMessages, isUserOnline }) => {
+const ContactsContainer: React.FC<ContactsContainerProps> = ({ username, profilePicture, users, startChat, latestMessages }) => {
   return (
     <section className="contacts-container">
       <header className="d-flex search-container">
@@ -24,14 +23,13 @@ const ContactsContainer: React.FC<ContactsContainerProps> = ({ username, profile
       {users.filter(user => user.username !== username).map((user, index) => {
         const roomId = [username, user.username].sort().join('-');
         const latestMessage = latestMessages[roomId];
-        const onlineStatus = isUserOnline(user.username) ? 'Online' : 'Offline';
         return (
           <div key={index} className="contact-container d-flex" onClick={() => startChat(user.username)}>
             {user.profilePicture &&
               <img className="chat-picture" src={user.profilePicture} alt={user.username} />
             }
             <div className="chat-info">
-              <div className="chat-name">{user.username} <span className={`online-status ${onlineStatus.toLowerCase()}`}>{onlineStatus}</span></div>
+              <div className="chat-name">{user.username}</div>
               <div className="chat-message">{latestMessage ? latestMessage.message : ''}</div>
             </div>
           </div>

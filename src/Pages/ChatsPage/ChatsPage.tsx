@@ -34,7 +34,6 @@ const ChatsPage: React.FC<ChatsPageProps> = ({ username, profilePicture }) => {
     const [activeChats, setActiveChats] = useState<ActiveChats>({});
     const [currentRecipient, setCurrentRecipient] = useState<string>('');
     const [latestMessages, setLatestMessages] = useState<{ [key: string]: Message | null }>({});
-    const [onlineUsers, setOnlineUsers] = useState<string[]>([]);
 
     const toggleAboutContainer = () => {
         setShowAboutContainer(prevState => !prevState);
@@ -57,15 +56,6 @@ const ChatsPage: React.FC<ChatsPageProps> = ({ username, profilePicture }) => {
 
         socket.on('userLeft', (leftUser: string) => {
             setUsers((prevUsers) => prevUsers.filter(user => user.username !== leftUser));
-            setOnlineUsers((prevOnlineUsers) => prevOnlineUsers.filter(user => user !== leftUser));
-        });
-
-        socket.on('userConnected', (connectedUser: string) => {
-            setOnlineUsers((prevOnlineUsers) => [...prevOnlineUsers, connectedUser]);
-        });
-
-        socket.on('userDisconnected', (disconnectedUser: string) => {
-            setOnlineUsers((prevOnlineUsers) => prevOnlineUsers.filter(user => user !== disconnectedUser));
         });
 
         socket.on('receiveMessage', (data: string) => {
@@ -144,11 +134,6 @@ const ChatsPage: React.FC<ChatsPageProps> = ({ username, profilePicture }) => {
         }));
     };
 
-    const isUserOnline = (username: string): boolean => {
-        return onlineUsers.includes(username);
-    };
-    
-
     return (
         <div className="sections-container">
             <ContactsContainer
@@ -156,8 +141,7 @@ const ChatsPage: React.FC<ChatsPageProps> = ({ username, profilePicture }) => {
                 profilePicture={profilePicture}
                 users={users}
                 startChat={startChat}
-                latestMessages={latestMessages} 
-                isUserOnline={isUserOnline}            
+                latestMessages={latestMessages}         
             />
             <ChatContainer
                 username={username}
