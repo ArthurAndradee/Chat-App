@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Message } from '../../Pages/ChatsPage/ChatsPage';
 
 interface User {
@@ -15,12 +15,23 @@ interface ContactsContainerProps {
 }
 
 const ContactsContainer: React.FC<ContactsContainerProps> = ({ username, profilePicture, users, startChat, latestMessages }) => {
+  const [searchTerm, setSearchTerm] = useState('');
+
+  const filteredUsers = users.filter(user => 
+    user.username !== username && user.username.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   return (
     <section className="contacts-container">
       <header className="d-flex search-container">
-        <input className="search-about" placeholder="Chats" />
+        <input
+          className="search-about"
+          placeholder="Chats"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
       </header>
-      {users.filter(user => user.username !== username).map((user, index) => {
+      {filteredUsers.map((user, index) => {
         const roomId = [username, user.username].sort().join('-');
         const latestMessage = latestMessages[roomId];
         return (

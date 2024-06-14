@@ -150,7 +150,7 @@
 }
 
 .msg-card-body {
-    overflow-y: auto;
+    overflow: auto;
 }
 
 .user-img-msg {
