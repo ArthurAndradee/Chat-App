@@ -1,5 +1,4 @@
-/* eslint-disable jsx-a11y/alt-text */
-import React, { FormEvent } from 'react';
+import React, { useEffect, useRef, FormEvent } from 'react';
 
 interface Message {
   roomId: string;
@@ -31,6 +30,18 @@ const ChatContainer: React.FC<ChatContainerProps> = ({
   sendMessage,
   toggleAboutContainer
 }) => {
+  const messagesEndRef = useRef<HTMLDivElement>(null);
+
+  const scrollToBottom = () => {
+    if (messagesEndRef.current) {
+      messagesEndRef.current.scrollIntoView({ behavior: 'auto' });
+    }
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [activeChats, currentRecipient]);
+
   const currentRecipientUser = users.find(user => user.username === currentRecipient);
 
   return (
@@ -54,7 +65,7 @@ const ChatContainer: React.FC<ChatContainerProps> = ({
           <div className="chat-messages-container">
             <div className="messages-box">
               <div className="card-body msg-card-body">
-              {activeChats[[username, currentRecipient].sort().join('-')]?.map((msg, index) => {
+                {activeChats[[username, currentRecipient].sort().join('-')]?.map((msg, index) => {
                   const senderUser = users.find(user => user.username === msg.sender);
                   return (
                     <div key={index} className={msg.sender === username ? 'd-flex justify-content-start flex-row-reverse' : 'd-flex justify-content-start mb-4'}>
@@ -76,6 +87,7 @@ const ChatContainer: React.FC<ChatContainerProps> = ({
                     </div>
                   );
                 })}
+                <div ref={messagesEndRef} />
               </div>
             </div>
             <form className="message-form" onSubmit={(e: FormEvent) => {
